@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{78DB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{3073D996-8C9E-49B6-85E4-D3EDF0A3E2E3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seervices", "Seervices", "{68FE57FD-0118-4CEE-9C5B-28C9C288D80F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{68FE57FD-0118-4CEE-9C5B-28C9C288D80F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Serrvices.CouponAPI", "Mango.Serrvices.CouponAPI\Mango.Serrvices.CouponAPI.csproj", "{7105E00C-A621-4891-92D3-D76EC7137783}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.CouponAPI", "Mango.Serrvices.CouponAPI\Mango.Services.CouponAPI.csproj", "{7105E00C-A621-4891-92D3-D76EC7137783}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
