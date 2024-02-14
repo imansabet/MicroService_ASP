@@ -78,6 +78,25 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+        [HttpPost]
+        public ResponseDTO Post([FromBody] CouponDTO couponDTO) 
+        {
+            try
+            {
+                Coupon obj = _mapper.Map<Coupon>(couponDTO);
+                _db.Coupons.Add(obj);
+                _db.SaveChanges();
+
+                _response.Result = _mapper.Map<CouponDTO>(obj);
+            }
+            catch (Exception e)
+            {
+                _response.IsSuccess = false;
+                _response.Message = e.Message;
+
+            }
+            return _response;
+        }
 
     }
 }
