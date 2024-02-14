@@ -116,6 +116,25 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+        [HttpDelete]
+        public ResponseDTO Delete(int id)
+        {
+            try
+            {
+                Coupon obj = _db.Coupons.First(u => u.CouponId == id);
+                _db.Coupons.Remove(obj);
+                _db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                _response.IsSuccess = false;
+                _response.Message = e.Message;
+
+            }
+            return _response;
+        }
+
 
     }
 }
