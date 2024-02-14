@@ -36,9 +36,11 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+
         [HttpGet]
         [Route("{id:int}")]
         public ResponseDTO Get(int id)
+
         {
             try
             {
@@ -47,6 +49,28 @@ namespace Mango.Services.CouponAPI.Controllers
                 _response.Result = _mapper.Map<CouponDTO>(obj);
             }
             catch (Exception e)   
+            {
+                _response.IsSuccess = false;
+                _response.Message = e.Message;
+
+            }
+            return _response;
+        }
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDTO GetByCode(string code)
+        {
+            try
+            {
+                Coupon obj = _db.Coupons.FirstOrDefault(u => u.CouponCode.ToLower() == code.ToLower());
+                if (obj == null) 
+                {
+                    _response.IsSuccess =   false;
+                }
+
+                _response.Result = _mapper.Map<CouponDTO>(obj);
+            }
+            catch (Exception e)
             {
                 _response.IsSuccess = false;
                 _response.Message = e.Message;
