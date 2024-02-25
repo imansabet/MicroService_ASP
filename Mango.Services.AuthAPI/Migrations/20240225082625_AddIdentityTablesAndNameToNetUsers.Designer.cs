@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mango.Services.AuthAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240224163617_AddNameToIdentityUser")]
-    partial class AddNameToIdentityUser
+    [Migration("20240225082625_AddIdentityTablesAndNameToNetUsers")]
+    partial class AddIdentityTablesAndNameToNetUsers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
