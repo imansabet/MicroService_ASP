@@ -35,7 +35,7 @@ namespace Mango.Web.Controllers
                 ModelState.AddModelError("CustomError", responseDTO.Message);
                 return View(obj);
             }
-        }
+        }  
         [HttpGet]
         public IActionResult Register()
         {
