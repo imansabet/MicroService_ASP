@@ -85,11 +85,12 @@ namespace Mango.Web.Controllers
             return View(obj);
         }
         [HttpGet]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
 
         {
-            LoginRequestDTO loginRequestDTO = new();
-            return View(loginRequestDTO);
+            await HttpContext.SignOutAsync();
+            _tokenProvider.ClearToken();
+            return RedirectToAction("Index","Home");
         }
         private async Task SignInUser(LoginResponseDTO model) 
         {
