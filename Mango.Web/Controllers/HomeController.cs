@@ -32,7 +32,7 @@ namespace Mango.Web.Controllers
             return View(list);
         }
         [Authorize]
-        public async Task<IActionResult> Details(int productId)
+        public async Task<IActionResult> ProductDetails(int productId)
         {
             ProductDTO? model = new();
             ResponseDTO? response = await _productService.GetProductByIdAsync(productId);
