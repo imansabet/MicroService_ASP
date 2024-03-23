@@ -23,7 +23,7 @@ namespace Mango.Web.Controllers
         private async Task<CartDTO> LoadCartbasedOnLoggedInUser() 
         {
             var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
-            ResponseDTO response = await _cartService.GetCartByUserIdAsync(userId);
+            ResponseDTO? response = await _cartService.GetCartByUserIdAsync(userId);
             if (response != null && response.IsSuccess) 
             {
                 CartDTO cartDTO = JsonConvert.DeserializeObject<CartDTO>(Convert.ToString(response.Result));
