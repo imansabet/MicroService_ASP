@@ -1,3 +1,4 @@
+using IdentityModel;
 using Mango.Web.Models;
 using Mango.Web.Service.IService;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +11,11 @@ namespace Mango.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
-
-        public HomeController(IProductService productService)
+        private readonly ICartService _cartservice;
+        public HomeController(IProductService productService, ICartService cartservice)
         {
             _productService = productService;
+            _cartservice = cartservice;
         }
 
         public async Task<IActionResult> Index()
@@ -46,6 +48,40 @@ namespace Mango.Web.Controllers
                 TempData["error"] = response?.Message;
             }
             return View(model);
+        }
+        [HttpPost]
+        [Authorize]
+        [ActionName("ProductDetails")]
+        public async Task<IActionResult> ProductDetails(ProductDTO productDTO)
+        {
+            CartDTO cartDTO = new CartDTO()
+            {
+                CartHeader = new CartHeaderDTO
+                {
+                    UserId = User.Claims.Where(u => u.Type == JwtClaimTypes.Subject)?.FirstOrDefault()?.Value 
+                }
+            };
+            CartDetialsDTO cartDetails = new CartDetialsDTO()
+            {
+                Count = productDTO.Count,
+                ProductId = productDTO.ProductId,
+            };
+            List<CartDetialsDTO> cartDetialsDTOs = new () { cartDetails };
+            cartDTO.CartDetails = cartDetialsDTOs;
+
+
+            ResponseDTO? response = await _cartservice.UpsertCartAsync(cartDTO);
+
+            if (response != null && response.IsSuccess)
+            {
+                TempData["Success"] = "Item Has been added to Shopping Cart";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
+            return View(productDTO);
         }
 
         public IActionResult Privacy()
